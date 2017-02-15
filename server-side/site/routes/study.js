@@ -5,12 +5,12 @@ var fileService = require('./upload.js');
 
 var Server = mongo.Server,
     Db = mongo.Db,
-    ObjectID = mongo.BSONPure.ObjectID;
+    ObjectID = mongo.ObjectID;
  
 
 var MongoClient = mongo.MongoClient;
 var db = null;
-MongoClient.connect("mongodb://user:password@ip:27017/site?authSource=admin", function(err, authdb) {
+MongoClient.connect("mongodb://user:password@localhost:27017/site?authSource=admin", function(err, authdb) {
   // Now you can use the database in the db variable
   db = authdb;
   console.log( err || "connected!" );
