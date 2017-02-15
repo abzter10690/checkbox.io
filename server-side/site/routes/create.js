@@ -43,7 +43,7 @@ exports.createStudy = function(req, res) {
 
         	collection.insert(study, {safe:true}, function(err, result) 
         	{
-        		console.log( err || "Study created: " + result[0]._id );
+        		console.log( err || "Study created: " + study._id );
 
         		if( err )
         		{
@@ -51,7 +51,7 @@ exports.createStudy = function(req, res) {
         		}
         		else
         		{
-                    study.setPublicLink( result[0]._id );
+                    study.setPublicLink( study._id );
 
                     // update with new public link, and notify via email, redirect user to admin page.
                     collection.update( {'_id' : study._id}, {'$set' : {'publicLink' : study.publicLink}},
