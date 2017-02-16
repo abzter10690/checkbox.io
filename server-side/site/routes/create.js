@@ -1,3 +1,4 @@
+
 var mongo = require('mongodb');
 var crypto = require('crypto');
 var emailjs = require('emailjs/email');
@@ -7,6 +8,8 @@ var models = require('./studyModel.js');
 var Server = mongo.Server,
     Db = mongo.Db,
     BSON = mongo.BSONPure;
+
+require('dotenv').config();    
  
 var MongoClient = mongo.MongoClient;
 var db = null;

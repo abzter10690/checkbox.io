@@ -13,6 +13,8 @@ var emailServer  = emailjs.server.connect({
    ssl:     true
 });
 
+require('dotenv').config();
+
 var MongoClient = mongo.MongoClient;
 var db = null;
 

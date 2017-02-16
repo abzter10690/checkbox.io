@@ -5,6 +5,8 @@ var _ = require('underscore');
 var Server = mongo.Server,
     Db = mongo.Db,
     ObjectID = mongo.BSONPure.ObjectID;
+
+require('dotenv').config();
  
 var MongoClient = mongo.MongoClient;
 var db = null;

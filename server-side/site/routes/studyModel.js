@@ -1,6 +1,8 @@
 // This is a constructor that is used to setup inheritance without
 // invoking the base's constructor. It does nothing, so it doesn't
 // create properties on the prototype like our previous example did
+require('dotenv').config();
+
 function surrogateCtor() {}
 
 function extend(base, sub) {
