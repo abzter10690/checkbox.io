@@ -17,6 +17,7 @@
     "kerberos" : "0.0.22",
     "emailjs" : "1.0.8",
     "validator" : "6.2.1" ,
-    "node-gyp-install" : "2.2.0"
+    "node-gyp-install" : "2.2.0", 
+    "dotenv" : "4.0.0"
   }
 }
