@@ -9,6 +9,10 @@ var express = require('express'),
 	admin = require('./routes/admin.js')
 	;
 
+require('dotenv').config();
+
+console.log(process.env.MONGO_USER);
+
 var app = express();
 
 app.configure(function () {
