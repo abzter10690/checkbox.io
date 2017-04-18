@@ -41,6 +41,8 @@ app.post('/api/design/survey',
 );
 
 app.get('/test' , function(req , res){
+
+	//res.writeHead( 200 , {'Content-Type' : 'text/plain'});
 	res.send('hello world');
 });
 
