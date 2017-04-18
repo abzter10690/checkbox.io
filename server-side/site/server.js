@@ -40,6 +40,10 @@ app.post('/api/design/survey',
 	}
 );
 
+app.get('/test' , function(req , res){
+	res.send('hello world');
+});
+
 //app.get('/api/design/survey/all', routes.findAll );
 //app.get('/api/design/survey/:id', routes.findById );
 //app.get('/api/design/survey/admin/:token', routes.findByToken );
