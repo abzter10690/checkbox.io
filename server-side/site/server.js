@@ -40,10 +40,10 @@ app.post('/api/design/survey',
 	}
 );
 
-app.get('/test' , function(req , res){
+app.get('/api/test' , function(req , res){
 
 	//res.writeHead( 200 , {'Content-Type' : 'text/plain'});
-	res.send('hello world');
+	res.send('Hi there . we are still in the process of creating TEST FEATURE.');
 });
 
 //app.get('/api/design/survey/all', routes.findAll );
