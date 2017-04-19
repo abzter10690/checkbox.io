@@ -38,9 +38,9 @@ exports.createStudy = function(req, res) {
     var studyKind = req.body.studyKind;
 
     client.get('createStudyFeature', function(err,value){
-      if(value=='off'){
+      if(value!='on'){
 
-        res.send("Key expired or doesn't anymore"); 
+        res.send("This feature is turned off for you. Please contact customer care."); 
 
       }else{
 
