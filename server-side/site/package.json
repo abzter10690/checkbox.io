@@ -18,6 +18,7 @@
     "mongodb": "2.2.22",
     "mongodb-core": "2.1.7",
     "node-gyp-install": "2.2.0",
+    "redis": "^2.7.1",
     "underscore": "1.8.3",
     "validator": "6.2.1"
   }
