@@ -3,6 +3,8 @@ var mongo = require('mongodb');
 var crypto = require('crypto');
 var emailjs = require('emailjs/email');
 var models = require('./studyModel.js');
+var redis = require('redis');
+var client = redis.createClient(6379, process.env.REDIS_IP, {})
 
  
 var Server = mongo.Server,
@@ -35,43 +37,56 @@ exports.createStudy = function(req, res) {
     var invitecode = req.body.invitecode; 
     var studyKind = req.body.studyKind;
 
-    if( invitecode != "RESEARCH" )
-    {
-        res.send({'error':'Invalid invitecode'});
-        return;
-    }
+    client.get('createStudyFeature', function(err,value){
+      if(value=='off'){
 
-    basicCreate( req, res, studyKind ).onCreate( function(study)
-    {
-    	db.collection('studies', function(err, collection) 
-    	{
-    		if( err )
-    			console.log( err );
+        res.send("Key expired or doesn't anymore"); 
 
-        	collection.insert(study, {safe:true}, function(err, result) 
-        	{
-        		console.log( err || "Study created: " + study._id );
+      }else{
 
-        		if( err )
-        		{
-        			res.send({error: err });
-        		}
-        		else
-        		{
-                    study.setPublicLink( study._id );
+        if( invitecode != "RESEARCH" )
+      {
+          res.send({'error':'Invalid invitecode'});
+          return;
+      }
 
-                    // update with new public link, and notify via email, redirect user to admin page.
-                    collection.update( {'_id' : study._id}, {'$set' : {'publicLink' : study.publicLink}},
-                        function(err, result )
-                    {
-                        sendStudyEmail( study );
-                        res.send({admin_url: study.adminLink});
-                    });
-        		}
-        	});
+      basicCreate( req, res, studyKind ).onCreate( function(study)
+      {
+        db.collection('studies', function(err, collection) 
+        {
+          if( err )
+            console.log( err );
 
-        });
-    });
+            collection.insert(study, {safe:true}, function(err, result) 
+            {
+              console.log( err || "Study created: " + study._id );
+
+              if( err )
+              {
+                res.send({error: err });
+              }
+              else
+              {
+                study.setPublicLink( study._id );
+
+                // update with new public link, and notify via email, redirect user to admin page.
+                collection.update( {'_id' : study._id}, {'$set' : {'publicLink' : study.publicLink}},
+                    function(err, result )
+                {
+                    sendStudyEmail( study );
+                    res.send({admin_url: study.adminLink});
+                });
+              }
+            });
+
+          });
+      });
+        
+      }   
+      
+      });
+
+    
 };
 
 
