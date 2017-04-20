@@ -12,9 +12,7 @@ var express = require('express'),
 var redis = require('redis');
 var client = redis.createClient(6379, process.env.REDIS_IP, {});
 
-var a = 10;
-
-var error = false;
+var error = true;
 
 require('dotenv').config();
 
@@ -52,7 +50,7 @@ app.get('/api/test' , function(req , res){
 	if(error==false){
 		res.send('The TEST FEATURE is working perfectly. Thanks for reaching out.');
 	}else{
-		res.status(500).send('Looks like Something is Broken!'+res.status+" code :"+res.statusCode);
+		res.status(500).send('Looks like Something is Broken! \n ERROR!!! \n ERROR!!! \n ERROR!!!');
 	}
 
 	//res.writeHead( 200 , {'Content-Type' : 'text/plain'});
