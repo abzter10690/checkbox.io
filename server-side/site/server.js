@@ -9,6 +9,13 @@ var express = require('express'),
 	admin = require('./routes/admin.js')
 	;
 
+var redis = require('redis');
+var client = redis.createClient(6379, process.env.REDIS_IP, {});
+
+var a = 10;
+
+var error = false;
+
 require('dotenv').config();
 
 console.log(process.env.MONGO_USER);
@@ -42,8 +49,31 @@ app.post('/api/design/survey',
 
 app.get('/api/test' , function(req , res){
 
+	if(error==false){
+		res.send('The TEST FEATURE is working perfectly. Thanks for reaching out.');
+	}else{
+		res.status(500).send('Looks like Something is Broken!'+res.status+" code :"+res.statusCode);
+	}
+
 	//res.writeHead( 200 , {'Content-Type' : 'text/plain'});
-	res.send('Hi there . we are still in the process of creating TEST FEATURE.');
+	
+});
+
+
+app.get('/api/myfeature' , function(req , res){
+
+	client.get('myfeature', function(err,value){
+    if(value!='on'){
+
+    	res.send(" LOOKS LIKE THIS AWESOME HAS BEEN DISBALED FOR YOU.");      
+
+    }else{
+
+    	res.send(" The newly deployed feature is fully working"); 
+    }   
+    
+    });
+	
 });
 
 //app.get('/api/design/survey/all', routes.findAll );
